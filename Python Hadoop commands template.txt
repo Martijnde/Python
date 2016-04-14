@@ -1,0 +1,16 @@
+See files in directory:  hdfs dfs -ls /user/cloudera/input 
+
+Remove Hadoop directory:    hadoop fs -rm -r /user/cloudera/input/laatste
+
+Remove file in Hadoop directory: hadoop fs -rm /user/cloudera/input/testfile1
+
+Make Hadoop directory:  hdfs dfs -mkdir /home/cloudera/input
+
+Add tekst to a new file in local workspace:  echo "A long time ago in a galaxy far far away" > /home/cloudera/file1
+
+Add local directory file to a Hadoop directory: hdfs dfs -put /home/cloudera/testfile1 /user/cloudera/input
+
+Make a new tekst file in local directory:  gedit wordcount_mapper.py
+
+See current directory: pwd
+
