@@ -1,0 +1,82 @@
+The full table has many more columns, 21 to be specific, than the ones displayed above and they're explained in further detail on FiveThirtyEight's Github repo.
+
+Here are the descriptions of the columns in the above snapshot:
+•Rank - Rank by median earnings
+•Major_code - Major code
+•Major - Major description
+•Major_category - Category of major
+•Total - Total number of people with major
+•Sample_size - Sample size (unweighted) of full-time
+•Men - Male graduates
+•Women - Female graduates
+•ShareWomen - Women as share of total
+•Employed - Number employed
+
+We have loaded the data in for years 2010-2012 for just recent college grads into the table recent_grads. 
+The database file we'll be working with is called jobs.db.
+
+#Import the Sqlite3 library into the environment. 
+#Then, use the Sqlite3 function connect() to connect to jobs.db and assign the returned Connection instance to conn.
+#Write a query that returns all of the values in the Major column from the recent_grads table.
+#•Store the full results set (a list of tuples) in majors. 
+#•Then, print the first 3 tuples in majors
+
+import sqlite3
+conn = sqlite3.connect("jobs.db")
+cursor = conn.cursor()
+
+query = "select Major from recent_grads;"
+cursor.execute(query)
+majors = cursor.fetchall()
+print(majors[0:2])
+
+
+#To make it easier to work with large results sets, the Cursor class allows you to control the number of results you want to retrieve at any given time. 
+#To return a single result (as a tuple), we use the Cursor method fetchone() and to return n results, we use the Cursor method fetchmany().
+#Write and run a query that returns the Major and Major_category columns from recent_grads. Then, fetch the first 5 results and store it as five_results.
+
+query = "select Major, Major_category from recent_grads;"
+cursor.execute(query)
+five_results = cursor.fetchmany(5)
+
+
+#Close the connection to the database using the Connection instance method close() method.
+conn = sqlite3.connect("jobs.db")
+conn.close()
+
+
+#Connect to the database jobs2.db, which contains the same data as jobs.db. Write and execute a query that returns all of the major names 
+#(Major) in reverse alphabetical order (Z to A). Assign the full result set to reverse_alphabetical. Finally, close the connection to the database.
+
+conn = sqlite3.connect("jobs2.db")
+query = "select Major from recent_grads order by Major desc;"
+reverse_alphabetical = conn.cursor().execute(query).fetchall()
+conn.close()
+
+#Modify the nfl_wins function so that it takes a team name, in the form of a string, and a year, also in the form of a string, as input. 
+#Call this new function nfl_wins_in_a_year Your function should output the number of wins the team had in the given year, as an integer. 
+#Use the and operator to combine booleans, checking whether the desired team won and whether the game happened in the correct year for each row in the dataset.
+#Use your function to assign the number of wins by the "Cleveland Browns" in "2010" to browns_2010_wins.
+#Use your function to assign the number of wins by the "Philadelphia Eagles" in "2011" to eagles_2011_wins.
+
+import csv
+f = open("nfl.csv", 'r')
+nfl_wins_in_a_year = list(csv.reader(f))
+
+def nfl_wins_year(team):
+    count = 0
+    for row in nfl_wins_in_a_year:
+        if row[2] == "Cleveland Browns" and row[0] == "2010" :
+            count = count + 1
+    return count
+
+browns_2010_wins = nfl_wins_year("Cleveland Browns")
+
+def nfl_wins_year(team):
+    count = 0
+    for row in nfl_wins_in_a_year:
+        if row[2] == "Philadelphia Eagles" and row[0] == "2011" :
+            count = count + 1
+    return count
+
+eagles_2011_wins = nfl_wins_year("Philadelphia Eagles")

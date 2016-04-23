@@ -1,0 +1,119 @@
+https://archive.ics.uci.edu/ml/datasets/Forest+Fires
+
+#Each row describes a fire that happened in Montesinho National Park. Here's a listing of the columns:
+
+#X -- The X position on the grid where the fire occurred.
+#Y -- The Y position on the grid where the fire occured.
+#month -- the month the fire occcurred.
+#day -- the day of the week the fire occurred.
+#temp -- the temperature in Celsius when the fire occurred.
+#wind -- the wind speed when the fire occurred.
+#rain -- the rainfall when the fire occurred.
+#area -- the area the fire consumed
+
+#The dataset is stored in the forest_fires.csv file.
+#Use the read_csv() method from Pandas to read forest_fires.csv into the variable forest_fires.
+#Use the Dataframe method head() to print out the first 5 rows of forest_fires.
+
+
+import pandas
+forest_fires = pandas.read_csv("forest_fires.csv")
+print(forest_fires.head(5))
+
+#Plotting in Python is mostly done with the matplotlib library. 
+#Most matplotlib plotting functions are in the pyplot module. To save space, we often rename this module to plt:
+
+import matplotlib.pyplot as plt
+
+#Make a scatter plot with the wind column on the x-axis and the area column on the y-axis.
+#Make a scatter plot with the temp column on the x-axis and the area column on the y-axis.
+#Remember to use plt.show() after creating each plot to show it.
+
+
+#Make a scatter plot with the wind column on the x-axis and the area column on the y-axis.
+#Make a scatter plot with the temp column on the x-axis and the area column on the y-axis.
+#Remember to use plt.show() after creating each plot to show it.
+
+import matplotlib.pyplot as plt
+
+plt.scatter(forest_fires["wind"], forest_fires["area"])
+plt.show()
+
+plt.scatter(forest_fires["temp"], forest_fires["area"])
+plt.show()
+
+
+#Another commonly used type of chart is a line chart. Line charts are used when the observations are related in some way. 
+#Let's say we wanted to graph the height of a single child as they aged:
+
+age   height
+5     25
+10    45
+15    65
+20    75
+25    75
+
+#In the above dataset, we measure the height of a single child at different ages. 
+#A line graph is laid out like a scatterplot, except each of the points is linked with a line. 
+#Linking the points makes sense because all of the measurements are from a single child, and the line shows how the child's height changed over time. 
+#Here's the code we'd write:
+
+age = [5, 10, 15, 20, 25, 30]
+height = [25, 45, 65, 75, 75, 75]
+
+import matplotlib.pyplot as plt
+
+plt.plot(age, height)
+plt.show()
+
+
+#Use the bar() method to plot area_by_y.index on the x-axis and area_by_y on the y-axis.
+#Use the bar() method to plot area_by_x.index on the x-axis and area_by_x on the y-axis.
+
+area_by_y = forest_fires.pivot_table(index="Y", values="area", aggfunc=numpy.mean)
+area_by_x = forest_fires.pivot_table(index="X", values="area", aggfunc=numpy.mean)
+
+plt.bar(area_by_y.index, area_by_y)
+plt.show()
+
+plt.bar(area_by_x.index, area_by_x)
+plt.show()
+
+#You can create a horizontal bar chart with the barh() method. 
+#The x-axis values and y-axis values are passed into the method in the same way that they're passed into the bar() method, 
+#except they are reversed when they get plotted. The first variable passed in is plotted on the y-axis, and the second is plotted on the x-axis.
+
+plt.barh(area_by_y.index, area_by_y)
+plt.show()
+
+#Make a scatterplot with the wind column of forest_fires on the x-axis and the area column of forest_fires on the y-axis.
+#Give the chart the title Wind speed vs fire area, the y-axis label Area consumed by fire, and the x-axis label Wind speed when fire started
+
+plt.scatter(forest_fires["wind"], forest_fires["area"])
+plt.title("Wind speed vs fire area")
+plt.xlabel("Wind speed when fire started")
+plt.ylabel("Area consumed by fire")
+plt.show()
+
+
+#Matplotlib is extremely customizable, and in later missions, we'll explore changing the styles at a more granular level. 
+#For now, we'll explore changing the global matplotlib style, which will make a whole host of theme changes to plots.
+#We can do this with the style.use() method. This will switch to the ggplot style:
+
+plt.style.use("ggplot")
+
+#Matplotlib has a few built-in styles that can be used, including:
+
+#fivethirtyeight -- the style of the plots on the site fivethirtyeight.com.
+#ggplot -- the style of the popular R plotting library ggplot.
+#dark_background -- will give the plot a darker background.
+#bmh -- the style used in a popular online statistics book.
+
+#Switch to the "fivethirtyeight" style.
+#Plot the rain column of forest_fires on the x-axis and the area column of forest_fires on the y-axis.
+
+plt.style.use("fivethirtyeight")
+
+plt.scatter(forest_fires["rain"], forest_fires["area"])
+plt.show()
+
